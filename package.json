@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "start": "node ."
+  },
   "dependencies": {
     "@discordjs/rest": "^1.1.0",
     "discord-api-types": "^0.37.5",
