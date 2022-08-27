@@ -12,7 +12,8 @@ let pro = new Promise((res, rej) => {
             if(err) throw err;
             let f = files.filter(x => x.endsWith('.js'));
             f.forEach(file => {
-                commands.push(file);
+                const fi = require(`./commands/${ctg}/${file}`);
+                commands.push(fi.data);
                 res(commands);
             })
         })
@@ -23,7 +24,7 @@ let pro = new Promise((res, rej) => {
 pro.then((x) => {
 
     console.log(x);
-    
+
     const rest = new REST({ version: '10' }).setToken(process.env['TOKEN']);
 
     rest.put(Routes.applicationCommands(clientID), { body: x })
