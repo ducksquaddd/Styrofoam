@@ -21,11 +21,23 @@ function execute(i) {
     const time = i.options.getString('time');
     const reason = i.options.getString('reason');
 
-    const ending = time.slice(time.length-1);
-    const t = time.slice(0, time.length-1);
+    const ex = /^\d*[smhdw]/g;
+
+    let a;
+
+    if(ex.test(time)) {
+        let arr = ex.exec(time);
+        a = arr[0];
+    } else {
+        return i.reply({ content: `don't try to break my bot bruh`, ephemeral: true })
+    }
+
+    const ending = a.slice(a.length-1);
+    const t = a.slice(0, a.length-1);
 
     let z;
     let k;
+
 
     if(ending === 's') {
         z = Number(t) * 1000;
@@ -44,7 +56,7 @@ function execute(i) {
         k = "weeks"
     } else {
         return i.reply({ content: `oi dumbass wsg bruh`, ephemeral: true })
-    }
+    };
 
     try {
         member.timeout(z, reason).then((x) => {
