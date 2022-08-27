@@ -8,7 +8,7 @@ const data = new SlashCommandBuilder()
     .addMentionableOption(option =>
         option.setName('target').setDescription('Select a user.').setRequired(true)
     )
-    .addNumberOption(option =>
+    .addStringOption(option =>
         option.setName('time').setDescription('Time to mute this user for in seconds.').setRequired(true)
     )
     .addStringOption(option =>
@@ -18,14 +18,37 @@ const data = new SlashCommandBuilder()
 
 function execute(i) {
     const member = i.options.getMentionable('target');
-    const time = i.options.getNumber('time');
+    const time = i.options.getString('time');
     const reason = i.options.getString('reason');
 
-    let seconds = time * 1000;
+    const ending = time.slice(time.length-1);
+    const t = time.slice(0, time.length-1);
+
+    let z;
+    let k;
+
+    if(ending === 's') {
+        z = Number(t) * 1000;
+        k = "seconds";
+    } else if(ending === 'm') {
+        z = Number(t) * 60 * 1000;
+        k = "minutes";
+    } else if (ending === 'h') {
+        z = Number(t) * 60 * 60 * 1000;
+        k = "hours";
+    } else if (ending === 'd') {
+        z = Number(t) * 60 * 60 * 24 * 1000;
+        k = "days";
+    } else if (ending === 'w') {
+        z = Number(t) * 60 * 60 * 24 * 7 * 1000;
+        k = "weeks"
+    } else {
+        return i.reply({ content: `oi dumbass wsg bruh`, ephemeral: true })
+    }
 
     try {
-        member.timeout(seconds, reason).then((x) => {
-            i.reply(`Muted ${x.user.username} for ${time} seconds. Reason: ${reason}`)
+        member.timeout(z, reason).then((x) => {
+            i.reply(`Muted ${x.user.username} for ${t} ${k}. Reason: ${reason}`)
         });
     } catch (err) {
         console.log(err);
