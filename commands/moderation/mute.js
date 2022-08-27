@@ -18,7 +18,7 @@ const data = new SlashCommandBuilder()
 
 function execute(i) {
     const member = i.options.getMentionable('target');
-    const time = i.options.getString('time');
+    const time = i.options.getNumber('time');
     const reason = i.options.getString('reason');
 
     let seconds = time * 1000;
