@@ -1,33 +1,51 @@
-const { REST } = require('@discordjs/rest');
-const { Routes } = require('discord-api-types/v10');
+const { REST } = require("@discordjs/rest");
+const { Routes } = require("discord-api-types/v10");
 const { clientID, categories } = require('./config.json');
+const fs = require('fs');
 
-const fs = require('node:fs');
-const path = require('node:path');
+const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
 
-let commands = [];
-let pro = new Promise((res, rej) => {
-    categories.forEach((ctg) => {
-        fs.readdir(path.resolve(`./commands/${ctg}/`), (err, files) => {
-            if(err) throw err;
-            let f = files.filter(x => x.endsWith('.js'));
-            f.forEach(file => {
-                const fi = require(`./commands/${ctg}/${file}`);
-                commands.push(fi.data);
-                res(commands);
-            })
-        })
+let a = new Promise((res, rej) => {
+    fs.readdir(`./commands/${categories[0]}/`, (err, files) => {
+        if (err) throw err;
+
+        let js = files.filter(x => x.endsWith('.js'));
+
+        let commands = [];
+        js.forEach(function (x) {
+            const L = require(`./commands/${categories[0]}/${x}`);
+            commands.push(L.data.toJSON());
+        });
+        res(commands);
+    })
+})
+let b = new Promise((res, rej) => {
+    fs.readdir(`./commands/${categories[1]}/`, (err, files) => {
+        if (err) throw err;
+
+        let js = files.filter(x => x.endsWith('.js'));
+
+        let commands = [];
+        js.forEach(function (x) {
+            const L = require(`./commands/${categories[1]}/${x}`);
+            commands.push(L.data.toJSON());
+        });
+        res(commands);
     })
 })
 
 
-pro.then((x) => {
-
-    console.log(x);
-
-    const rest = new REST({ version: '10' }).setToken(process.env['TOKEN']);
-
-    rest.put(Routes.applicationCommands(clientID), { body: x })
-	.then(() => console.log('Successfully registered application commands globally.'))
-	.catch(console.error);
-});
+Promise.all([a, b]).then((a) => {
+    let r = [];
+    a.forEach((b) => {
+        b.forEach((c) => {
+            r.push(c);
+        })
+    })
+    rest.put(Routes.applicationCommands(clientID), { body: r })
+        .then(() => {
+            console.log("Success.")
+        }).catch((err) => {
+            console.log(err)
+        });
+})
