@@ -12,7 +12,7 @@ const data = new SlashCommandBuilder()
         option.setName('time').setDescription('Time to mute this user for in seconds.').setRequired(true)
     )
     .addStringOption(option =>
-        option.setName('reason').setDescription('Reason as to why you want to mute this user.').setRequired(false)
+        option.setName('reason').setDescription('Reason as to why you want to mute this user.').setRequired(true)
     )
     .setDefaultMemberPermissions(PermissionsBitField.Flags.ModerateMembers);
 
@@ -25,7 +25,7 @@ function execute(i) {
 
     try {
         member.timeout(seconds, reason).then((x) => {
-            i.reply(`Muted.`)
+            i.reply(`Muted ${x.user.username} for ${time} seconds. Reason: ${reason}`)
         });
     } catch (err) {
         console.log(err);
