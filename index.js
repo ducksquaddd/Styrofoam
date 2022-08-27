@@ -8,5 +8,6 @@ bot.maintenance = require('./config.json').maintenance;
 bot.categories = require('./config.json').categories;
 
 require('./handlers/command')(bot);
+require('./handlers/events')(bot);
 
 bot.login(process.env.TOKEN);
