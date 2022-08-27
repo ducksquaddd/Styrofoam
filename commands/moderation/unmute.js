@@ -17,7 +17,7 @@ function execute(i) {
     const member = i.options.getMentionable('target');
     const reason = i.options.getString('reason');
     try {
-        member.timeout(z, reason).then((x) => {
+        member.timeout(null, reason).then((x) => {
             i.reply(`Unmuted ${x.user.username}. Reason: ${reason}`)
         });
     } catch (err) {
