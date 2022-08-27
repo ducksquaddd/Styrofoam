@@ -26,10 +26,10 @@ function execute(i) {
     let a;
 
     if(ex.test(time)) {
-        let arr = ex.exec(time);
+        let arr = time.match(ex);
         a = arr[0];
     } else {
-        return i.reply({ content: `don't try to break my bot bruh`, ephemeral: true })
+        return i.reply({ content: `Unfortunately, you didn't specify a correct time.`, ephemeral: true })
     }
 
     const ending = a.slice(a.length-1);
@@ -55,7 +55,7 @@ function execute(i) {
         z = Number(t) * 60 * 60 * 24 * 7 * 1000;
         k = "weeks"
     } else {
-        return i.reply({ content: `oi dumbass wsg bruh`, ephemeral: true })
+        return i.reply({ content: `Unfortunately, an error has occurred, please try again.`, ephemeral: true })
     };
 
     try {
