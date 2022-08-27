@@ -21,6 +21,9 @@ let pro = new Promise((res, rej) => {
 
 
 pro.then((x) => {
+
+    console.log(x);
+    
     const rest = new REST({ version: '10' }).setToken(process.env['TOKEN']);
 
     rest.put(Routes.applicationCommands(clientID), { body: x })
