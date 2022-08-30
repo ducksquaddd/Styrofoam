@@ -1,5 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { PermissionsBitField } = require('discord.js');
+const { PermissionsBitField, SlashCommandBuilder } = require('discord.js');
 const Luxon = require('luxon');
 
 const data = new SlashCommandBuilder()
@@ -37,7 +36,7 @@ function execute(i) {
 
     let z;
     let k;
-    
+
     switch (ending) {
         case 's':
             z = Number(t) * 1000;
