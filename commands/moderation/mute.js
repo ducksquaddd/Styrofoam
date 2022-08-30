@@ -37,26 +37,31 @@ function execute(i) {
 
     let z;
     let k;
-
-
-    if(ending === 's') {
-        z = Number(t) * 1000;
-        k = "seconds";
-    } else if(ending === 'm') {
-        z = Number(t) * 60 * 1000;
-        k = "minutes";
-    } else if (ending === 'h') {
-        z = Number(t) * 60 * 60 * 1000;
-        k = "hours";
-    } else if (ending === 'd') {
-        z = Number(t) * 60 * 60 * 24 * 1000;
-        k = "days";
-    } else if (ending === 'w') {
-        z = Number(t) * 60 * 60 * 24 * 7 * 1000;
-        k = "weeks"
-    } else {
-        return i.reply({ content: `Unfortunately, an error has occurred, please try again.`, ephemeral: true })
-    };
+    
+    switch (ending) {
+        case 's':
+            z = Number(t) * 1000;
+            k = "seconds";
+            break
+        case 'm':
+            z = Number(t) * 60 * 1000;
+            k = "minutes";
+            break
+        case 'h':
+            z = Number(t) * 60 * 60 * 1000;
+            k = "hours";
+            break
+        case 'd':
+            z = Number(t) * 60 * 60 * 24 * 1000;
+            k = "days";
+            break
+        case 'w': 
+            z = Number(t) * 60 * 60 * 24 * 7 * 1000;
+            k = "weeks"
+            break
+        default:
+            return i.reply({ content: `Unfortunately, an error has occurred, please try again.`, ephemeral: true })
+    }
 
     try {
         member.timeout(z, reason).then((x) => {
