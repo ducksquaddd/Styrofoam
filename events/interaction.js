@@ -1,7 +1,8 @@
 module.exports = {
-    evt: "interactionCreate",
-    once: false,
-    run: async (interaction, bot) => {
+    event_type: "interactionCreate",
+    run_once: false,
+
+    event_run: async (interaction, bot) => {
       if(!interaction.isCommand()) return;
   
       const command = bot.commands.get(interaction.commandName);
