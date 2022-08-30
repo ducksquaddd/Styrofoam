@@ -16,7 +16,7 @@ module.exports = async (bot) => {
                 })
             }
             catch (err) {
-                return message.reply(`FUCK: ${err.message}`)
+                console.log(err)
             }
         })
     })
