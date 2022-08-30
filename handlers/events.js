@@ -8,12 +8,10 @@ module.exports = async (bot) => {
         jsFiles.forEach((event) => {
             const eventFile = require(path.resolve(`./events/${event}`));
 
-            const event_name = eventFile.evt;
-            const event_run = eventFile.run;
-            const event_once = eventFile.once;
+            const { event_type, run_once, event_run } = eventFile
 
             try {
-                bot[event_once ? 'once' : 'on'](event_name, async (...args) => {
+                bot[run_once ? 'once' : 'on'](event_type, async (...args) => {
                     event_run(...args, bot);
                 })
             }
