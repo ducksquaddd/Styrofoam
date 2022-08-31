@@ -12,7 +12,7 @@ const data = new SlashCommandBuilder()
     .addStringOption(option => 
         option
         .setName('hidden')
-        .setChoices(
+        .addChoices(
             { name: "yes", value: true },
             { name: "no", value: false }
         )
