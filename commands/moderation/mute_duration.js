@@ -13,8 +13,8 @@ const data = new SlashCommandBuilder()
         option
         .setName('hidden')
         .addChoices(
-            { name: "yes", value: true },
-            { name: "no", value: false }
+            { name: "yes", value: 'true' },
+            { name: "no", value: 'false' }
         )
     )
     .setDefaultMemberPermissions(PermissionsBitField.Flags.ModerateMembers);
@@ -25,9 +25,9 @@ function execute(i) {
 
     try {
         if(member.isCommunicationDisabled()) {
-            i.reply({ content: `${member.tag} is muted until ${member.communicationDisabledUntil}.`, ephemeral: hidden });
+            i.reply({ content: `${member.tag} is muted until ${member.communicationDisabledUntil}.`, ephemeral: Boolean(hidden) });
         } else {
-            i.reply({ content: `${member.tag} is not currently muted.`, ephemeral: hidden })
+            i.reply({ content: `${member.tag} is not currently muted.`, ephemeral: Boolean(hidden) })
         }
     } catch (err) {
         console.log(err);
