@@ -12,8 +12,8 @@ module.exports = {
             status: "dnd",
             activities: [
                 {
-                    name: "Spotify",
-                    type: ActivityType.Listening
+                    name: "with fire.",
+                    type: ActivityType.Playing
                 }
             ]
         }
