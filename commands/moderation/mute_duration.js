@@ -12,10 +12,10 @@ const data = new SlashCommandBuilder()
     .addStringOption(option => 
         option
         .setName('hidden')
-        .setChoices([
+        .setChoices(
             { name: "yes", value: true },
             { name: "no", value: false }
-        ])
+        )
     )
     .setDefaultMemberPermissions(PermissionsBitField.Flags.ModerateMembers);
 
