@@ -14,6 +14,7 @@ let a = new Promise((res, rej) => {
         let commands = [];
         js.forEach(function (x) {
             const L = require(`./commands/${categories[0]}/${x}`);
+            console.log(L.data.name)
             commands.push(L.data.toJSON());
         });
         res(commands);
@@ -28,6 +29,7 @@ let b = new Promise((res, rej) => {
         let commands = [];
         js.forEach(function (x) {
             const L = require(`./commands/${categories[1]}/${x}`);
+            console.log(L.data.name)
             commands.push(L.data.toJSON());
         });
         res(commands);
