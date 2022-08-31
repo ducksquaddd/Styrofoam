@@ -12,8 +12,8 @@ module.exports = {
             status: "dnd",
             activities: [
                 {
-                    name: "Every new version of Discord.js is even more a pain in the ass than the last version.",
-                    type: ActivityType.Custom
+                    name: "Spotify",
+                    type: ActivityType.Listening
                 }
             ]
         }
