@@ -8,11 +8,11 @@ _____
 ## Planned 
 
 - moderation
-    - mute
+    - mute x
     - warn
     - warncount
     - whois
-    - ban
-    - kick
+    - ban x
+    - kick x
     - softban
     - tempban

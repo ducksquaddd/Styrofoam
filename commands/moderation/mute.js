@@ -60,15 +60,23 @@ function execute(i) {
             break
         default:
             return i.reply({ content: `Unfortunately, an error has occurred, please try again.`, ephemeral: true })
-    }
+    };
 
-    try {
-        member.timeout(z, reason).then((x) => {
-            i.reply(`Muted ${x.user.username} for ${t} ${k}. Reason: ${reason}`)
-        });
-    } catch (err) {
-        console.log(err);
-    }
+    if(member.manageable) {
+        if(member.moderatable) {
+            try {
+                member.timeout(z, reason).then((x) => {
+                    i.reply(`Muted ${x.user.username} for ${t} ${k}. Reason: ${reason}`)
+                });
+            } catch (err) {
+                console.log(err);
+            }
+        } else {
+            i.reply({ content: "This user is not moderatable. Please make sure I can kick/ban/timeout/etc this user.", ephemeral: true });
+        }
+    } else {
+        i.reply({ content: "This user is above my role in the server hierarchy. I cannot do anything to this user.", ephemeral: true })
+    };
 }
 
 module.exports = { data, execute };
