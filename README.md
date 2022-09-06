@@ -1,6 +1,6 @@
 # Styrofoam
 
-Styrofoam is a Discord bot that is a work in progress.<br>
+Styrofoam is a work in progress Discord bot.<br>
 It will be equipped with moderation, economy, image, and other capabilities.
 
 _____
